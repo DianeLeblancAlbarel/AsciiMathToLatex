@@ -1536,6 +1536,28 @@ div.tocify {
 <!--chapter:end:index.rmd-->
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
+<p>Il existe beaucoup de langages et de logiciels d’édition de documents.
+Les plus utilisés sont ceux qui adhèrent au principe <em>What You See Is What You Get</em> <strong>(WYSIWYG)</strong>
+qui permettent à l’utilisateur de voir le résultats d’apercevoir le docmuents lorsque sa création.
+Tels outils ont été facteur essentiel dans la démocratisation de l’ordinateur.
+Néanmoins, les logiciels WYSIWYG sont limités face à certains utilisateurs vis-à-vis l’efficacité et la qualité des résultats,
+notamment dans le domaine scientifique.</p>
+<p>En effet, le langage LaTeX represente un alternatif excellent pour l’edition des textes scientifiques ou ceux
+contenant du code informatique, ainsi que HTML pour l’édition des pages web.
+Néanmoins, l’utilisation de ces langages reste limité par soucis de simplicité et d’accéssiblité.</p>
+<p>En revanche, il existe des logiciels/languages intermédiares qui rendent LaTeX et HTML plus accéssibles.
+Nous nous sommes intéressés par le langage <strong>markdown</strong> qui est simple à lire/écrire et peut être
+facilement interprété en LaTeX ou HTML par des programmes comme <strong>pandoc</strong>.</p>
+<p>Markdown permet d’écrire des équations mathématiques en format TeX, qui pourrons être affichés
+correctement sur le document final sans problème.
+En revanche, les équations mathématiques en TeX sont rarement lisibles, ce qui est contradictoire
+avec l’objectif d’écrire les documents en markdown.</p>
+<p>On a donc eu l’idée de développer un langage pour les expressions mathématiques où elles serons
+simple à lire et écrire.
+Nous avons tout de suite trouvé qu’un tel langage existe: <a href="asciimath.org"><strong>AsciiMath</strong></a>.
+AsciiMath est un langage <em>markup</em> qui utilise dans son syntaxe des symboles assez proches
+de leur rendu (e.g. <code>oo</code> pour <span class="math inline">\(\infty\)</span>).</p>
+<p>Nous avons donc décidé de créer un interpréteur <em>AsciiMath en LaTeX</em>.</p>
 <!--chapter:end:parts/1_intro.md-->
 </div>
 <div id="grammaire" class="section level1">
