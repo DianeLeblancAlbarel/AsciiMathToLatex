@@ -6,7 +6,7 @@
 %option noyywrap
 
 NUMBER		    [0-9]+(.[0-9]*)?
-LATIN_LETTER    [a-z]|[A-Z]
+LATIN_LETTER    [a-zA-Z]
 GREEK_LETTER    alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|vartheta|iota|kappa|lambda|Lambda|mu|nu|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|phi|Phi|varphi|chi|psi|Psi|omega|Omega
 RELATION_SYM    "!="|"<"|"<="|">"|">="|"-<"|"-<="|">-"|"<-="|in|"!in"|sub|sup|sube|supe|"-="|"~="|"~~"|"prop"
 ARROW           uarr|darr|rarr|"->"|">->"|"->>"|">->>"|"|->"|larr|harr|rArr|lArr|hArr|"=>"|"<=>"
@@ -17,7 +17,7 @@ LARGE_OP        sum|prod|int|oint|nnn|uuu
 NUM_SET         CC|RR|QQ|ZZ|NN
 SINGLE_DLM      "|__"|"|~~"|"__|"|"~|"
 SPACE           "\ "|quad
-STANDARD_FUNC   sin|cos|tan|sec|csc|cot|arcsin|arccos|arctan|sinh|cosh|tanh|sech|csch|coth|exp|log|ln|det|dim|mod|gcd|lcm|lub|glb|min|max|f|g
+STANDARD_FUNC   sin|cos|tan|sec|csc|cot|arcsin|arccos|arctan|sinh|cosh|tanh|sech|csch|coth|exp|log|ln|det|dim|mod|gcd|lcm|lim|lub|glb|min|max|f|g
 
 UNARY_OP	    sqrt|abs|floor|ceil|norm|vec|hat|bar|ul|dot|ddot|cancel|ubrace|obrace
 BINARY_OP	    root|overset|underset|frac|stackrel
@@ -37,6 +37,10 @@ RIGHT_DLM	    ")"|"]"|":}"|"}"|":)"|">>"
 {LEFT_DLM}			{yylval.str = strdup(yytext); return LEFT;}
 {RIGHT_DLM}			{yylval.str = strdup(yytext); return RIGHT;}
 {WHITESPACE}+		;
+
+"_" {printf("flex found sub\n"); return SUB;}
+"^" {printf("flex found super\n"); return SUPER;}
+"/" {printf("flex found over\n"); return OVER;}
 .					printf("Unrecognized sequence: %s\n", yytext);
 
 %%

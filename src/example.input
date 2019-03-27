@@ -1,3 +1,5 @@
+sum_n n = -1/12
+
 lim_(n->oo) (1+x/n)^n = e^x
 
 int_a^b dx = {: x ]_a^b = b - a

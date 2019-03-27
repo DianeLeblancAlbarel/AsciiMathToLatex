@@ -8,50 +8,56 @@ FILE *yyin;
 void yyerror(const char *s);
 %}
 
+%define parse.lac full
+%define parse.error verbose
+
 %union {
     char *str;
 }
 
-%token <str> CONST UNARY BINARY LEFT RIGHT
-%left LEFT RIGHT UNARY BINARY
+%token <str> CONST
+%left  <str> LEFT RIGHT UNARY BINARY
+%left  SUB SUPER OVER
 
-%type  <str> S I E
+%type  <str> S E
 
 %%
 
 S   : CONST {
+        printf("Const\t%s\n", $1);
         free($1);
     }
     | LEFT E RIGHT {
+        printf("Delimiters\t%s%s%s\n", $1, $2, $3);
         free($1); free($3);
     }
     | UNARY S {
+        printf("Unary\t%s%s\n", $1, $2);
         free($1);
     }
     | BINARY S S {
+        printf("Binary\t%s%s%s\n", $1, $2, $3);
         free($1);
     }
     ;
 
-I   : S "_" S {
-        // do something
+E   : S E {
+        printf("IE\t\t%s %s\n", $1, $2);
     }
-    | S "^" S {
-        // do something
+    | S OVER S {
+        printf("Over\t%s/%s\n", $1, $3);
     }
-    | S "_" S "^" S {
-        // do something
+    | S SUB S {
+        printf("Subscript\t%s_%s\n", $1, $3);
+    }
+    | S SUPER S {
+        printf("Superscript\t%s^%s\n", $1, $3);
+    }
+    | S SUB S SUPER S {
+        printf("Fully_grown\t%s_%s^%s\n", $1, $3, $5);
     }
     | S {
-        // do something
-    }
-    ;
-
-E   : I E {
-        // do something
-    }
-    | I "/" I {
-        // do something
+        printf("Simple\t%s\n", $1);
     }
     ;
 
@@ -69,6 +75,6 @@ int main() {
 }
 
 void yyerror(const char *s) {
-    printf("Parse error: %s\n", s);
+    fprintf(stderr,"%s\n", s);
     exit(EXIT_FAILURE);
 }
