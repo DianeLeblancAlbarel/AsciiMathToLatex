@@ -2,12 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 int yylex();
 int yyparse();
 FILE *yyin;
 void yyerror(const char *s);
-
 %}
 
 %union {
