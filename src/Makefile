@@ -1,13 +1,11 @@
-run: lex.yy.o
-	gcc -o run lex.yy.o asciimath2tex.tab.o
+am2t: lex.yy.c am2t.tab.c am2t.tab.h
+	gcc am2t.tab.c lex.yy.c -o am2t -lm
 
-lex.yy.o: asciimath2tex.l
-	flex asciimath2tex.l
-	gcc -c lex.yy.c
+lex.yy.c: am2t.l am2t.tab.h
+	flex am2t.l
 
-asciimath2tex.tab.o: asciimath2tex.y
-	bison -d asciimath2tex.y
-	gcc -c asciimath2tex.tab.c
+am2t.tab.c am2t.tab.h: am2t.y
+	bison -d am2t.y
 
 clean:
-	rm -f scan *.o asciimath2tex.output *.tab.c lex.yy.c
+	rm -f am2t *.o am2t.output *.tab.c *.tab.h lex.yy.c

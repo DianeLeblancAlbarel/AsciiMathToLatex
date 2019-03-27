@@ -1,2 +1,3 @@
 lim_(n->oo) (1+x/n)^n = e^x
+
 int_a^b dx = {: x ]_a^b = b - a
